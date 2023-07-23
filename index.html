@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulación</title>
+    <link rel="stylesheet" href="./assets/pico.min.css" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <section>
+        <h1>Simulación</h1>
+        <form id="form">
+          <!--Obtener fecha de inicio y fecha de fin-->
+          <p class="warning">
+            Advertencia, no ingreses fechas muy lejanas entre sí, dependiendo de
+            su equipo, puede llevar a tiempos de espera muy largos
+          </p>
+          <div>
+            <label for="fechaInicio">Fecha de inicio</label>
+            <input type="datetime-local" name="fechaInicio" id="fechaInicio" />
+          </div>
+          <div>
+            <label for="fechaFin">Fecha de fin</label>
+            <input type="datetime-local" name="fechaFin" id="fechaFin" />
+          </div>
+          <button id="btnSimular" type="submit">Simular</button>
+        </form>
+      </section>
+      <section>
+        <div id="resultados"></div>
+      </section>
+    </main>
+    <script src="./assets/main.js"></script>
+  </body>
+</html>
