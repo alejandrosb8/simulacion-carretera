@@ -207,13 +207,32 @@ let form = document.getElementById("form");
 let fechaInicioInput = document.getElementById("fechaInicio");
 let fechaFinInput = document.getElementById("fechaFin");
 let resultadosDiv = document.getElementById("resultados");
+let btnSimular = document.getElementById("btnSimular");
 
 // Agrega un evento al formulario para que se ejecute la simulacion al enviarlo
 form.addEventListener("submit", function (e) {
   // Evita que se recargue la pagina al enviar el formulario
   e.preventDefault();
 
+  if (fechaInicioInput.value == "" || fechaFinInput.value == "") {
+    // Si no se ingreso una fecha de inicio o fin
+    // Muestra un mensaje de error en el HTML
+    resultadosDiv.innerHTML =
+      "<p class='warning'>Por favor, ingrese una fecha de inicio y una fecha de fin.</p>";
+    return;
+  } else if (fechaInicioInput.value >= fechaFinInput.value) {
+    // Si la fecha de inicio es mayor o igual a la fecha de fin
+    // Muestra un mensaje de error en el HTML
+    resultadosDiv.innerHTML =
+      "<p class='warning'>Por favor, ingrese una fecha de inicio menor a la fecha de fin.</p>";
+    return;
+  }
+
   resultadosDiv.innerHTML = "<p>Simulando...</p><progress></progress>";
+  btnSimular.disabled = true;
+  btnSimular.setAttribute("aria-busy", "true");
+  btnSimular.setAttribute("aria-disabled", "true");
+  btnSimular.textContent = "Simulando...";
 
   setTimeout(function () {
     // Convierte los datos ingresados en objetos Date
@@ -255,5 +274,10 @@ form.addEventListener("submit", function (e) {
 
     // Muestra los resultados en el HTML
     mostrarResultados(resultadosSimulacion);
+
+    btnSimular.disabled = false;
+    btnSimular.setAttribute("aria-busy", "false");
+    btnSimular.setAttribute("aria-disabled", "false");
+    btnSimular.textContent = "Simular";
   }, 1000);
 });
